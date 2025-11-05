@@ -44,6 +44,31 @@ class _NewsFormPageState extends State<NewsFormPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children:[
+              // === Title ===
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    hintText: "Judul Berita",
+                    labelText: "Judul Berita",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                  ),
+                  onChanged: (String? value) {
+                    setState(() {
+                      _title = value!;
+                    });
+                  },
+                  validator: (String? value) {
+                    if (value == null || value.isEmpty) {
+                      return "Judul tidak boleh kosong!";
+                    }
+                    return null;
+                  },
+                ),
+              ),
+
               // === Content ===
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -143,7 +168,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: const Text('Produk berhasil tersimpan'),
+                            title: const Text('Berita berhasil tersimpan'),
                             content: SingleChildScrollView(
                               child: Column(
                                 crossAxisAlignment:
