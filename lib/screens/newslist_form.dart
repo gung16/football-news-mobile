@@ -165,7 +165,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
                   child: ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor:
-                        MaterialStateProperty.all(Colors.indigo),
+                        WidgetStateProperty.all<Color>(Colors.indigo)
                   ),
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
@@ -174,7 +174,7 @@ class _NewsFormPageState extends State<NewsFormPage> {
                       // If you using chrome,  use URL http://localhost:8000
                       
                       final response = await request.postJson(
-                        "http://i-gusti411-footballnews.pbp.cs.ui.ac.id/create-flutter/",
+                        "http://localhost:8000/create-flutter/",
                         jsonEncode({
                           "title": _title,
                           "content": _content,

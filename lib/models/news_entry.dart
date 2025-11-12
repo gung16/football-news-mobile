@@ -6,7 +6,7 @@ import 'dart:convert';
 
 List<NewsEntry> newsEntryFromJson(String str) => List<NewsEntry>.from(json.decode(str).map((x) => NewsEntry.fromJson(x)));
 
-String welcomeToJson(List<NewsEntry> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+String newsEntryToJson(List<NewsEntry> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class NewsEntry {
     String id;
@@ -32,16 +32,19 @@ class NewsEntry {
     });
 
     factory NewsEntry.fromJson(Map<String, dynamic> json) => NewsEntry(
-        id: json["id"],
-        title: json["title"],
-        content: json["content"],
-        category: json["category"],
-        thumbnail: json["thumbnail"],
-        newsViews: json["news_views"],
-        createdAt: DateTime.parse(json["created_at"]),
-        isFeatured: json["is_featured"],
-        userId: json["user_id"],
+      id: json["id"]?.toString() ?? '',
+      title: json["title"] ?? 'Untitled',
+      content: json["content"] ?? '',
+      category: json["category"] ?? 'General',
+      thumbnail: json["thumbnail"] ?? '',
+      newsViews: json["news_views"] ?? 0,
+      createdAt: json["created_at"] != null
+          ? DateTime.parse(json["created_at"])
+          : DateTime.now(),
+      isFeatured: json["is_featured"] ?? false,
+      userId: json["user_id"],
     );
+
 
     Map<String, dynamic> toJson() => {
         "id": id,
